@@ -1,35 +1,42 @@
+import { useState } from "react";
 import Chicken from "../images/chicken.svg";
 import Hamburger from "../images/hamburger.svg";
 import Pizza from "../images/pizza.svg";
 import Submarine from "../images/submarine.svg";
 import OrderItem from "./OrderItem";
-export default function CreateOrder() {
-  const orderLists = [
-    {
-      id: 1,
-      image: Hamburger,
-      title: "Hamburger",
-      price: "300",
-    },
-    {
-      id: 2,
-      image: Chicken,
-      title: "Chicken Nuggets",
-      price: "300",
-    },
-    {
-      id: 3,
-      image: Pizza,
-      title: "Pizza",
-      price: "300",
-    },
-    {
-      id: 4,
-      image: Submarine,
-      title: "Submarine",
-      price: "300",
-    },
-  ];
+
+const orderLists = [
+  {
+    id: 1,
+    image: Hamburger,
+    title: "Hamburger",
+    price: "300",
+  },
+  {
+    id: 2,
+    image: Chicken,
+    title: "Chicken Nuggets",
+    price: "300",
+  },
+  {
+    id: 3,
+    image: Pizza,
+    title: "Pizza",
+    price: "300",
+  },
+  {
+    id: 4,
+    image: Submarine,
+    title: "Submarine",
+    price: "300",
+  },
+];
+
+export default function CreateOrder({ setOrderLists }) {
+  const [order, setOrder] = useState({
+    customerName: "",
+    items: [],
+  });
 
   return (
     <>
@@ -41,6 +48,19 @@ export default function CreateOrder() {
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Customer Name</label>
         <input
+          onChange={(e) => {
+            // setOrder((prev) => {
+            //   return {
+            //     ...prev,
+            //     customerName: e.target.value,
+            //   };
+            // });
+            setOrder((prev) => ({
+              ...prev,
+              customerName: e.target.value,
+            }));
+          }}
+          value={order.customerName}
           type="text"
           className="w-full bg-gray-700 bg-opacity-50 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
         />
